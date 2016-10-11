@@ -1,7 +1,9 @@
 from osgeo import gdal, gdalnumeric, ogr
+# Using pillow for this...
 from PIL import Image, ImageDraw
 import os
 import numpy as np
+import pdb
 
 gdal.UseExceptions()
 
@@ -10,11 +12,13 @@ def clip_raster1( shapefile_path, raster_path ):
     This function will convert the rasterized clipper shapefile
     to a mask for use within GDAL.
 
-    This comes from:
+    This comes (with slight modification) from:
 
     https://pcjericks.github.io/py-gdalogr-cookbook/raster_layers.html#clip-a-geotiff-with-shapefile
 
-    with slight modification...
+    which is an updated version of:
+    
+    http://geospatialpython.com/2011/02/clip-raster-using-shapefile.html
     '''
 
     def imageToArray(i):
@@ -126,7 +130,7 @@ def clip_raster1( shapefile_path, raster_path ):
     #
     xoffset =  ulX
     yoffset =  ulY
-    print "Xoffset, Yoffset = ( %f, %f )" % ( xoffset, yoffset )
+    print("Xoffset, Yoffset = ( %f, %f )" % ( xoffset, yoffset ))
 
     # Create a new geomatrix for the image
     geoTrans = list(geoTrans)
@@ -185,6 +189,8 @@ def clip_raster1( shapefile_path, raster_path ):
 
     gdal.ErrorReset()
 
+    return (clip, ulX, ulY, geoTrans)
+
 
 #if __name__ == '__main__':
 
@@ -239,7 +245,7 @@ def clip_raster2(rast, features_path, gt=None, nodata=-9999):
         '''
         Uses a gdal geomatrix (gdal.GetGeoTransform()) to calculate
         the pixel location of a geospatial coordinate; from:
-        http://pcjericks.github.io/py-gdalogr-cookbook/raster_layers.html#clip-a-geotiff-with-shapefile
+        http://pcjericks.github.io/py-gdalogr-cookbook/raster_layers.htmlclip-a-geotiff-with-shapefile
         '''
         ulX = geo_matrix[0]
         ulY = geo_matrix[3]
