@@ -1,6 +1,5 @@
 import gdal
 import gdalconst
-import pdb
 
 class BilFile(object):
 # This is the class used to open a .bil file and make georeferenced data
