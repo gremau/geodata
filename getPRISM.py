@@ -129,9 +129,10 @@ def getMonthlyPrismProvis(year, metdata, data_path, bil_name, coords_file):
 
 
 # Function for extracting 30 year normal PRISM precip data
-def get30yr800MNormal(prism_path, lat, lon, datamonth='annual', datatype='ppt'):
+def get_800m_30ynormal(prism_path, lat, lon, datamonth='annual',
+        datatype='ppt'):
     """
-    Extract 30 year normal PRISM data for a list of lat/lon coordinates.
+    Extract 800m 30 year normal PRISM data for a list of lat/lon coordinates.
 
     Args:
         prism_path (str) : path to directory containing prism zip files
