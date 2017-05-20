@@ -26,7 +26,7 @@ def getDailyPrism(year, metdata, data_path, coords_file):
         r'PRISM_{0}_stable_4kmD2_{1}0101_{1}1231_bil.zip/'.format(
             metdata, year) +
         r'PRISM_{0}_stable_4kmD2_{1}{2}{3}_bil.bil'.format(metdata, *ymd_tuple))
-        bil_ds = BilFile(bil_file)
+        bil_ds = gdalFile(bil_file)
         for j in range(len(pnts.index)):
             pt_val = bil_ds.extract_coord_val(pnts.lat[j], pnts.lon[j])
             df.iloc[i, j] = pt_val
@@ -54,7 +54,7 @@ def getDailyPrismProvis(year, month, metdata, data_path, bil_name, coords_file):
         bil_file = (r'/vsizip/' + data_path + bil_name + '/' +
         r'PRISM_{0}_provisional_4kmD2_{1}{2}{3}_bil.bil'.format(metdata, 
             *ymd_tuple))
-        bil_ds = BilFile(bil_file)
+        bil_ds = gdalFile(bil_file)
         for j in range(len(pnts.index)):
             pt_val = bil_ds.extract_coord_val(pnts.lat[j], pnts.lon[j])
             df.iloc[i, j] = pt_val
@@ -92,7 +92,7 @@ def getMonthlyPrism( metdata, data_path, coords_file ):
                     r'PRISM_{0}_stable_4kmM2_{1}{2}_bil.bil'.format(
                         metdata, *ym_tuple))
 
-        bil_ds = BilFile(bil_file)
+        bil_ds = gdalFile(bil_file)
         for j in range(len(pnts.index)):
             pt_val = bil_ds.extract_coord_val(pnts.lat[j], pnts.lon[j])
             df.iloc[i, j] = pt_val
@@ -120,7 +120,7 @@ def getMonthlyPrismProvis(year, metdata, data_path, bil_name, coords_file):
         r'PRISM_{0}_provisional_4kmM2_{1}{2}_bil.bil'.format(metdata, 
             *ym_tuple))
         #pdb.set_trace()
-        bil_ds = BilFile(bil_file)
+        bil_ds = gdalFile(bil_file)
         for j in range(len(pnts.index)):
             pt_val = bil_ds.extract_coord_val(pnts.lat[j], pnts.lon[j])
             df.iloc[i, j] = pt_val
@@ -162,7 +162,7 @@ def get_800m_30ynormal(prism_path, lat, lon, datamonth='annual',
             r'PRISM_{0}_30yr_normal_800mM2_all_bil.zip'.format(datatype), 
             r'PRISM_{0}_30yr_normal_800mM2_{1}_bil.bil'.format(datatype,
                 datamonth))
-    bil_obj = gf.BilFile(bil_file)
+    bil_obj = gf.gdalFile(bil_file)
     for j in range(len(lat)):
         df.loc[j, ['lat', 'lon']] = [lat[j], lon[j]]
         df.loc[j, datatype + '_PRISMn'] = bil_obj.extract_coord_val(
