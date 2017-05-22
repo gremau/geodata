@@ -24,7 +24,7 @@ class gdalFile(object):
         self.ncol = dataset.RasterXSize
         self.nrow = dataset.RasterYSize
         print('Opened {0}\n {1} raster bands\n{2} columns, {3} rows'.format(
-            fname, str(self.nbands), str(self.ncol), str(self.nrow)))
+            self.fname, str(self.nbands), str(self.ncol), str(self.nrow)))
 
         # Get georeferencing information and assign to object
         # properties
